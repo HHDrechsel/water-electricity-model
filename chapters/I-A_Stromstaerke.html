@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.A - Die Stromstärke | Water-Electricity-Model</title>
+    <meta name="description" 
+          content="Verstehen Sie Stromstärke durch die Wasser-Analogie: Wassermenge = Stromstärke in Ampere">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 15px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .breadcrumb a {
+            color: #0066CC;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background: white;
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .chapter-header {
+            border-left: 6px solid #0066CC;
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .chapter-number {
+            font-size: 18px;
+            color: #0066CC;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 10px;
+            font-family: Georgia, serif;
+        }
+
+        .intro {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 4px solid #FFD700;
+        }
+
+        .historical-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: #fafaf0;
+            border: 1px solid #e0e0d8;
+            border-radius: 6px;
+        }
+
+        .historical-section h2 {
+            color: #666;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .historical-section h2 {
+            color: #666;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        /* IMAGE GALLERY */
+        .image-gallery {
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        .gallery-main-image {
+            /*width: 100%;*/
+            /*max-width: 100%;*/
+	/* NEU: */
+width: 100%;
+max-width: 800px;   /* ← Maximum 800 Pixel breit*/
+height: auto;
+max-height: 600px;   /*← Maximum 600 Pixel hoch*/
+object-fit: contain;/* ← Behält Seitenverhältnis		*/
+			
+            height: auto;
+            border: 2px solid #0066CC;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .gallery-btn {
+            background: #0066CC;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            flex: 1;
+        }
+
+        .gallery-btn:hover {
+            background: #004499;
+        }
+
+        .page-counter {
+            background: #f0f8ff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #0066CC;
+            white-space: nowrap;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            border-color: #0066CC;
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* DOWNLOAD OPTIONS */
+        .download-options {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .download-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-controls {
+                flex-direction: column;
+            }
+
+            .gallery-btn {
+                width: 100%;
+            }
+
+            .page-counter {
+                width: 100%;
+                text-align: center;
+            }
+
+            .gallery-thumbnails {
+                gap: 8px;
+            }
+
+            .thumbnail {
+                width: 60px;
+                height: 80px;
+            }
+
+            .download-options {
+                flex-direction: column;
+            }
+
+            .download-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .explanation {
+            margin: 40px 0;
+            padding: 25px;
+            background: #f0f8ff;
+            border-radius: 6px;
+            border-left: 4px solid #0066CC;
+        }
+
+        .explanation h3 {
+            color: #0066CC;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .explanation p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 40px 0;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            width: 50%;
+        }
+
+        .comparison-table th:first-child {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+        }
+
+        .comparison-table th:last-child {
+            background: linear-gradient(135deg, #FFD700 0%, #FF9800 100%);
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .water-col {
+            width: 50%;
+        }
+
+        .electric-col {
+            width: 50%;
+        }
+
+        .key-concept {
+            background: #fff3cd;
+            border-left: 4px solid #FFD700;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .key-concept strong {
+            color: #FF9800;
+        }
+
+        .formula-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 25px 0;
+            font-size: 16px;
+        }
+
+        .formula-box .symbol {
+            color: #0066CC;
+            font-weight: bold;
+        }
+
+        .example-section {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .example-section h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .example-section p {
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .related-links {
+            background: #f0f0f0;
+            padding: 25px;
+            border-radius: 6px;
+            margin-top: 50px;
+        }
+
+        .related-links h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .related-links ul {
+            list-style: none;
+        }
+
+        .related-links li {
+            margin-bottom: 10px;
+        }
+
+        .related-links a {
+            color: #0066CC;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .related-links a:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 15px;
+            background: #0066CC;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-button:hover {
+            background: #004499;
+        }
+
+        .nav-button.prev {
+            background: #666;
+        }
+
+        .nav-button.prev:hover {
+            background: #444;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #0052A3;
+                padding: 20px;
+                gap: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li {
+                margin-bottom: 10px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .comparison-table {
+                font-size: 14px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">💧⚡ Water-Electricity Model</a>
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="/">Startseite</a></li>
+                    <li><a href="/chapters">Alle Kapitel</a></li>
+                    <li><a href="/about">Über dieses Projekt</a></li>
+                    <li><a href="/contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Startseite</a> /
+            <a href="/chapters">Kapitel</a> /
+            <a href="/chapters/I">I. Der elektrische Strom</a> /
+            <strong>I.A - Die Stromstärke</strong>
+        </div>
+    </div>
+
+    <main>
+        <div class="chapter-header">
+            <span class="chapter-number">KAPITEL I.A</span>
+            <h1>Die Stromstärke</h1>
+        </div>
+
+        <div class="intro">
+            <p>
+                <strong>Was ist Stromstärke?</strong> Um zu verstehen, was ein elektrischer Strom ist, können wir Wasserströme 
+                zum Vergleich heranziehen. Es gibt kleine Bäche mit wenig Wasser und 
+                große Flüsse mit großen Wassermengen. Genauso gibt es kleine elektrische Ströme 
+                und große elektrische Ströme. Die Stärke des Wassers messen wir in 
+                Liter pro Minute – die Stärke des elektrischen Stromes messen wir in 
+                <strong>Ampere (A)</strong>.
+            </p>
+        </div>
+
+        <!-- HISTORISCHE SEITE - JPG GALERIE -->
+        <div class="historical-section">
+            <h2>📖 Aus dem Lehrbuch von 1934</h2>
+            <p style="color: #666; margin-bottom: 20px;">
+                So erklärte man diese Konzepte vor 90 Jahren mit wunderschönen handgezeichneten Illustrationen.
+                Klicken Sie die Pfeile zum Blättern:
+            </p>
+            
+            <!-- Bild-Galerie -->
+            <div class="image-gallery">
+                <img id="gallery-image" 
+                     src="assets/images/chapters/I-A_Stromstaerke/page_001.jpg" 
+                     alt="Historische Seite zur Stromstärke - Lehrbuch 1934"
+                     class="gallery-main-image">
+                
+                <div class="gallery-controls">
+                    <button class="gallery-btn" onclick="previousPage()">← Vorherige Seite</button>
+                    <span class="page-counter">
+                        Seite <span id="current-page">1</span> von <span id="total-pages">4</span>
+                    </span>
+                    <button class="gallery-btn" onclick="nextPage()">Nächste Seite →</button>
+                </div>
+
+                <div class="gallery-thumbnails">
+                    <img src="assets/images/chapters/I-A_Stromstaerke/page_001.jpg" 
+                         alt="Seite 1" class="thumbnail active" onclick="goToPage(1)">
+                    <img src="assets/images/chapters/I-A_Stromstaerke/page_002.jpg" 
+                         alt="Seite 2" class="thumbnail" onclick="goToPage(2)">
+                    <img src="assets/images/chapters/I-A_Stromstaerke/page_003.jpg" 
+                         alt="Seite 3" class="thumbnail" onclick="goToPage(3)">
+                    <img src="assets/images/chapters/I-A_Stromstaerke/page_004.jpg" 
+                         alt="Seite 4" class="thumbnail" onclick="goToPage(4)">
+                </div>
+            </div>
+
+            <div class="image-caption">
+                Historische Illustration: Wassermenge als Analogon zur Stromstärke
+            </div>
+
+            <!-- Download-Optionen -->
+            <div class="download-options">
+                <a href="assets/documents/I-A_Stromstaerke.pdf" download class="download-btn">
+                    📄 Als PDF herunterladen
+                </a>
+                <span style="color: #999; font-size: 12px;">
+                    (4 Seiten, optimiert für Druck)
+                </span>
+            </div>
+        </div>
+
+        <!-- ERKLÄRUNG -->
+        <div class="explanation">
+            <h3>Was zeigt die historische Illustration?</h3>
+            <p>
+                Die Grafik oben zeigt die Grundidee: Ein dünnes Rinnsal Wasser in einem Bach 
+                entspricht einem schwachen elektrischen Strom (Stromstärke = 1 Ampere). 
+                Ein starker Fluss mit viel Wasser entspricht einem starken elektrischen Strom.
+            </p>
+            <p>
+                <strong>Merksatz:</strong> Je mehr Wasser pro Minute fließt, desto größer ist die Stromstärke. 
+                Je mehr elektrische Ladung pro Sekunde fließt, desto größer ist die Stromstärke in Ampere.
+            </p>
+        </div>
+
+        <!-- VERGLEICHSTABELLE -->
+        <h2 style="margin: 50px 0 20px 0; color: #333; border-bottom: 2px solid #0066CC; padding-bottom: 10px;">
+            Wasser ↔ Elektrizität
+        </h2>
+
+        <table class="comparison-table">
+            <tr>
+                <th>💧 WASSER</th>
+                <th>⚡ ELEKTRIZITÄT</th>
+            </tr>
+            <tr>
+                <td><strong>Wassermenge</strong> pro Zeiteinheit<br>(z.B. Liter pro Minute)</td>
+                <td><strong>Stromstärke</strong><br>Einheit: <strong>Ampere (A)</strong><br>Formelzeichen: <strong>I</strong></td>
+            </tr>
+            <tr>
+                <td>Dünnes Rinnsal = wenig Wasser pro Zeit</td>
+                <td>Schwacher Strom = 1 Ampere</td>
+            </tr>
+            <tr>
+                <td>Starker Fluss = viel Wasser pro Zeit</td>
+                <td>Starker Strom = 100 Ampere</td>
+            </tr>
+            <tr>
+                <td>Wassermenge beeinflusst die Kraft der Wassermühle</td>
+                <td>Stromstärke beeinflusst die Kraft des Motors</td>
+            </tr>
+        </table>
+
+        <!-- SCHLÜSSELKONZEPT -->
+        <div class="key-concept">
+            <p>
+                <strong>⚡ SCHLÜSSELBEGRIFF: Stromstärke</strong><br><br>
+                Die <strong>Stromstärke</strong> ist die Menge der elektrischen Ladung, 
+                die pro Sekunde durch einen Leiter fließt. Sie wird in <strong>Ampere (A)</strong> gemessen 
+                und mit dem Formelzeichen <strong>I</strong> dargestellt.
+            </p>
+        </div>
+
+        <!-- FORMELBOX -->
+        <div class="formula-box">
+            <span class="symbol">I</span> = <span class="symbol">Q</span> / <span class="symbol">t</span>
+            <br><br>
+            <small>
+                <span class="symbol">I</span> = Stromstärke in Ampere (A)<br>
+                <span class="symbol">Q</span> = Ladung in Coulomb (C)<br>
+                <span class="symbol">t</span> = Zeit in Sekunden (s)
+            </small>
+        </div>
+
+        <!-- PRAKTISCHES BEISPIEL -->
+        <div class="example-section">
+            <h4>💡 Praktisches Beispiel</h4>
+            <p>
+                <strong>Eine kleine Glühbirne:</strong> Stromstärke ≈ 0,5 A<br>
+                <strong>Eine Haushaltssteckdose:</strong> Stromstärke typisch ≈ 10-16 A<br>
+                <strong>Ein Elektroauto laden:</strong> Stromstärke ≈ 32-64 A<br>
+                <strong>Ein Blitz:</strong> Stromstärke ≈ 20.000-200.000 A (sehr gefährlich!)
+            </p>
+        </div>
+
+        <!-- VERWANDTE THEMEN -->
+        <div class="related-links">
+            <h3>🔗 Verwandte Konzepte in diesem Projekt</h3>
+            <ul>
+                <li><a href="/chapters/I/B">I.B - Die Spannung (Voltage) – Das Druckgefälle</a></li>
+                <li><a href="/chapters/I/F">I.F - Der Widerstand – Das Engnis im Rohr</a></li>
+                <li><a href="/chapters/I/G">I.G - Wie Stromstärke, Spannung und Widerstand zusammenwirken</a></li>
+                <li><a href="/chapters/I/D">I.D - Watt und Kilowattstunde – Die Leistung</a></li>
+            </ul>
+        </div>
+
+        <!-- NAVIGATIONSBUTTONS -->
+        <div class="navigation-buttons">
+            <a href="/chapters/I" class="nav-button prev">← Zurück: I. Übersicht</a>
+            <a href="/chapters/I/B" class="nav-button">Weiter: I.B Die Spannung →</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Water-Electricity-Model.info | Basierend auf einem Lehrbuch von 1934 | 
+        <a href="/about" style="color: #0066CC;">Über dieses Projekt</a> | 
+        <a href="/impressum" style="color: #0066CC;">Impressum</a></p>
+    </footer>
+
+    <script>
+        // NAVIGATION
+        function toggleNav() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // IMAGE GALLERY FUNCTIONALITY
+        let currentPage = 1;
+        const totalPages = 4; // Anzahl der Seiten pro Kapitel
+
+        // Basis-Pfad für Bilder (anpassen je nach Kapitel)
+        const imagePath = 'assets/images/chapters/I-A_Stromstaerke/page_';
+
+        function updateGallery() {
+            // Hauptbild aktualisieren
+            const imageElement = document.getElementById('gallery-image');
+            imageElement.src = imagePath + String(currentPage).padStart(3, '0') + '.jpg';
+            
+            // Seitenzähler aktualisieren
+            document.getElementById('current-page').textContent = currentPage;
+            
+            // Thumbnails aktualisieren
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                if (index + 1 === currentPage) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateGallery();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updateGallery();
+            }
+        }
+
+        function goToPage(pageNum) {
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                currentPage = pageNum;
+                updateGallery();
+            }
+        }
+
+        // Tastatur-Navigation (Links/Rechts Pfeile)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                nextPage();
+            } else if (event.key === 'ArrowLeft') {
+                previousPage();
+            }
+        });
+    </script>
+</body>
+</html>

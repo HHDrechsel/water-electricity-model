@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" 
+          content="Verstehen Sie Elektrizität durch Wasser-Analogien. Eine pädagogische Website basierend auf einem klassischen Lehrbuch von 1934.">
+    <meta property="og:title" content="Water-Electricity Model | Elektrizität verstehen">
+    <meta property="og:description" content="Lernen Sie Elektrizität durch intuitive Wasser-Analogien">
+    <title>Water-Electricity Model | Elektrizität durch Wasser erklärt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;FTitel
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 50%, #00284d 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-family: Georgia, serif;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 22px;
+            color: #FFD700;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FFD700;
+            color: #004499;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            background: #FFC500;
+        }
+
+        /* CONCEPT SECTION */
+        .concept {
+            background: white;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .concept h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 50px;
+            font-family: Georgia, serif;
+            border-bottom: 3px solid #0066CC;
+            padding-bottom: 20px;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .concept-card {
+            background: #f0f8ff;
+            padding: 30px;
+            border-radius: 6px;
+            border-left: 4px solid #0066CC;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .concept-card h3 {
+            color: #0066CC;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .concept-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .concept-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* CHAPTERS SECTION */
+        .chapters-section {
+            background: white;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .chapters-section h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 50px;
+            font-family: Georgia, serif;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 20px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .chapter-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 6px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .chapter-card:hover {
+            border-color: #0066CC;
+            box-shadow: 0 4px 12px rgba(0,102,204,0.15);
+            transform: translateY(-3px);
+        }
+
+        .chapter-card .number {
+            display: inline-block;
+            background: #0066CC;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .chapter-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .chapter-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .chapter-card a {
+            display: inline-block;
+            color: #0066CC;
+            text-decoration: none;
+            margin-top: 12px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .chapter-card a:hover {
+            color: #004499;
+        }
+
+        .chapter-preview {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 12px 0;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+
+        .chapter-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-view, .btn-download {
+            flex: 1;
+            display: inline-block;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-view {
+            background: #0066CC;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #004499;
+        }
+
+        .btn-download {
+            background: #FFD700;
+            color: #333;
+        }
+
+        .btn-download:hover {
+            background: #FFC500;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background: linear-gradient(135deg, #fafaf0 0%, #f5f5f0 100%);
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            color: #333;
+            font-family: Georgia, serif;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .about-image {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 500;
+            color: #FF9800;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            background: white;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 50px;
+            font-family: Georgia, serif;
+            border-bottom: 3px solid #0066CC;
+            padding-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .feature-item .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .feature-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .tagline {
+                font-size: 18px;
+            }
+
+            .concept h2,
+            .chapters-section h2,
+            .features h2,
+            .about h2 {
+                font-size: 26px;
+            }
+
+            .about .container {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 13px;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">💧⚡ Water-Electricity Model</a>
+            <nav>
+                <ul>
+                    <li><a href="#concepts">Konzept</a></li>
+                    <li><a href="#chapters">Kapitel</a></li>
+                    <li><a href="#about">Über</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Elektrizität durch Wasser verstehen</h1>
+            <p class="tagline">💧 = ⚡</p>
+            <p>
+                Wie funktioniert Strom? Warum brauchen wir Spannung? Was ist Widerstand? 
+                Diese Website erklärt die Grundlagen der Elektrizität mit intuitiven Wasser-Analogien – 
+                basierend auf einem klassischen deutschen Lehrbuch von 1934.
+            </p>
+            <a href="#chapters" class="cta-button">Jetzt entdecken</a>
+            <a href="#about" class="cta-button" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">Mehr erfahren</a>
+        </div>
+    </section>
+
+    <!-- CONCEPTS SECTION -->
+    <section class="concept" id="concepts">
+        <div class="container">
+            <h2>Die Kernidee</h2>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-icon">💧</div>
+                    <h3>Wassermenge</h3>
+                    <p>Wie viel Wasser pro Zeit fließt durch ein Rohr</p>
+                    <p style="margin-top: 12px; color: #0066CC; font-weight: bold;">= Stromstärke (Ampere)</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-icon">⛰️</div>
+                    <h3>Wasserdruck</h3>
+                    <p>Der Höhenunterschied treibt das Wasser an</p>
+                    <p style="margin-top: 12px; color: #0066CC; font-weight: bold;">= Spannung (Volt)</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-icon">🔌</div>
+                    <h3>Rohrdurchmesser</h3>
+                    <p>Ein enges Rohr behindert den Wasserfluß</p>
+                    <p style="margin-top: 12px; color: #0066CC; font-weight: bold;">= Widerstand (Ohm)</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-icon">⚙️</div>
+                    <h3>Wassermühle</h3>
+                    <p>Menge × Druck = Kraft der Mühle</p>
+                    <p style="margin-top: 12px; color: #0066CC; font-weight: bold;">= Leistung (Watt)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTERS SECTION -->
+    <section class="chapters-section" id="chapters">
+        <div class="container">
+            <h2>Die Kapitel</h2>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="number">I</div>
+                    <h3>Der elektrische Strom</h3>
+                    <p>Stromstärke, Spannung, Widerstand, Watt, Plus und Minus, Gleichstrom und Wechselstrom...</p>
+                    <a href="chapters/I-A_Stromstaerke.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">II</div>
+                    <h3>Magnetismus & Elektromagnetismus</h3>
+                    <p>Magnetische Felder, elektrische Klingel, Elektromotor, Meßinstrumente...</p>
+                    <a href="chapters/II_Overview.html">5 Unterthemen →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">III</div>
+                    <h3>Induktion & Selbstinduktion</h3>
+                    <p>Spulen, Drosseln, Induktionsprinzipien in der Praxis...</p>
+                    <a href="chapters/III.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">IV</div>
+                    <h3>Kondensatoren & Kapazität</h3>
+                    <p>Was sind Kondensatoren und wie funktionieren sie?</p>
+                    <a href="chapters/IV.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">V</div>
+                    <h3>Stromerzeuger</h3>
+                    <p>Elemente, Batterien, Generatoren, Dynamomaschinen...</p>
+                    <a href="chapters/V_Overview.html">2 Unterthemen →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">VI</div>
+                    <h3>Umspanner (Transformatoren)</h3>
+                    <p>Wie funktionieren Transformatoren?</p>
+                    <a href="chapters/VI.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">VII</div>
+                    <h3>Die Stromversorgung</h3>
+                    <p>Wie kommt der Strom in Ihr Haus?</p>
+                    <a href="chapters/VII.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">VIII</div>
+                    <h3>Der Leistungsfaktor</h3>
+                    <p>Scheinleistung vs. Wirkleistung erklärt</p>
+                    <a href="chapters/VIII.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">IX</div>
+                    <h3>Der Drehstrom</h3>
+                    <p>Drei-Phasen-Wechselstrom in Industrie und Gewerbe</p>
+                    <a href="chapters/IX.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">X</div>
+                    <h3>Chemische Wirkungen</h3>
+                    <p>Elektrolyse und chemische Prozesse</p>
+                    <a href="chapters/X.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">XI</div>
+                    <h3>Akkumulatoren</h3>
+                    <p>Stromsammler und Batterietechnologie</p>
+                    <a href="chapters/XI.html">Zum Kapitel →</a>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="number">XII</div>
+                    <h3>Wärmewirkungen</h3>
+                    <p>Heizung, Beleuchtung, Sicherungen, Schweißen...</p>
+                    <a href="chapters/XII_Overview.html">4 Unterthemen →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="container">
+            <h2>Warum diese Seite?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">📚</div>
+                    <h3>Historisch fundiert</h3>
+                    <p>Basierend auf einem deutschen Lehrbuch von 1934 mit Original-Illustrationen</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">🎨</div>
+                    <h3>Wunderbar illustriert</h3>
+                    <p>Handgezeichnete Bilder, gescannt und koloriert für beste Lesbarkeit</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">💡</div>
+                    <h3>Intuitiv verständlich</h3>
+                    <p>Wasser-Analogien machen abstrakte elektrische Konzepte greifbar</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">👨‍🎓</div>
+                    <h3>Pädagogisch wertvoll</h3>
+                    <p>Ideal für Schüler, Studenten und Interessierte</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">📱</div>
+                    <h3>Modern & mobil</h3>
+                    <p>Responsive Design funktioniert auf allen Geräten</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">🌍</div>
+                    <h3>Kostenlos & offen</h3>
+                    <p>Frei zugänglich für alle zum Lernen und Lehren</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div>
+                <h2>Über dieses Projekt</h2>
+                <p>
+                    Diese Website basiert auf einem <span class="highlight">klassischen deutschen Lehrbuch von 1934</span>, 
+                    das die Elektrizität mit wunderbar gezeichneten Wasser-Analogien erklärt.
+                </p>
+                <p>
+                    Der Kerngedanke ist genial und zeitlos: Elektrizität ist abstrakt und unsichtbar. 
+                    Aber Wasser sehen wir jeden Tag. Wenn wir Stromstärke als Wassermenge und Spannung als 
+                    Wasserdruck verstehen, wird Elektrizität plötzlich begreifbar.
+                </p>
+                <p>
+                    Diese Seite digitalisiert und modernisiert diese klassische Lehrmethode. 
+                    Die originalen Illustrationen wurden gescannt und koloriert, um sie für heutige Lernende zugänglich zu machen.
+                </p>
+                <p style="margin-top: 25px; font-weight: bold; color: #FF9800;">
+                    💡 Ziel: Elektrizität verständlich und unterhaltsam lehren – wie vor 90 Jahren.
+                </p>
+            </div>
+			<div class="about-image">
+				<img src="assets/images/lehrbuch_titel_1934.jpg" 
+					 alt="Originaltitelseite des Lehrbuchs von 1934"
+					 style="width: 70%; height: auto; border-radius: 6px;">
+			</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <p><strong>Water-Electricity Model</strong> – Eine pädagogische Website</p>
+            <p>Basierend auf einem Lehrbuch von 1934 | Modernisiert und digitalisiert für heutige Lernende</p>
+            <p style="margin-top: 20px; font-size: 12px;">
+                <a href="/impressum">Impressum</a> | 
+                <a href="/datenschutz">Datenschutz</a> | 
+                <a href="/kontakt">Kontakt</a>
+            </p>
+            <p style="margin-top: 15px; color: #999; font-size: 12px;">
+                © 2024 Water-Electricity-Model.info | Alle Rechte vorbehalten
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
